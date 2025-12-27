@@ -120,9 +120,9 @@ const KanbanBoard = () => {
             } ${snapshot.isDragging ? 'shadow-2xl scale-105 rotate-2 ring-4 ring-indigo-200' : 'hover:-translate-y-1'}`}
           >
             {/* Card Content */}
-            <div className="p-6">
+            <div className="p-5">
               {/* Header */}
-              <div className="flex justify-between items-start mb-4">
+              <div className="flex justify-between items-start mb-3">
                 <h3 className="font-bold text-gray-900 text-base flex-1 line-clamp-2 leading-snug">{request.subject}</h3>
                 {overdue && (
                   <span className="ml-3 px-3 py-1.5 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-bold rounded-lg shadow-lg animate-pulse flex-shrink-0">
@@ -133,11 +133,11 @@ const KanbanBoard = () => {
               
               {/* Description */}
               {request.description && (
-                <p className="text-sm text-gray-600 mb-5 line-clamp-2 leading-relaxed">{request.description}</p>
+                <p className="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed">{request.description}</p>
               )}
               
               {/* Metadata */}
-              <div className="space-y-3 mb-5">
+              <div className="space-y-2 mb-4">
                 {/* Type Badge */}
                 <div className="flex items-center gap-2">
                   <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg ${
@@ -171,7 +171,7 @@ const KanbanBoard = () => {
 
               {/* Assigned User */}
               {assignedUser && (
-                <div className="flex items-center pt-4 border-t border-gray-100 mt-4">
+                <div className="flex items-center pt-3 border-t border-gray-100 mt-3">
                   <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 text-white flex items-center justify-center text-sm font-bold shadow-md">
                     {assignedUser.name.charAt(0).toUpperCase()}
                   </div>
@@ -186,7 +186,7 @@ const KanbanBoard = () => {
               {!request.assignedTo && request.status === RequestStatus.NEW && (
                 <button
                   onClick={() => handleAssignToSelf(request.id)}
-                  className="mt-4 w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm py-3 px-4 rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 font-bold shadow-md hover:shadow-lg"
+                  className="mt-3 w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm py-3 px-4 rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 font-bold shadow-md hover:shadow-lg"
                 >
                   Assign to Me
                 </button>
@@ -199,12 +199,12 @@ const KanbanBoard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-indigo-50/30 to-purple-50/20 py-12">
-      <div className="max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-16">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-indigo-50/30 to-purple-50/20 py-8">
+      <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-12">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
           <div>
-            <div className="flex items-center gap-3 mb-3">
+            <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
@@ -212,7 +212,7 @@ const KanbanBoard = () => {
               </div>
               <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900 bg-clip-text text-transparent">Kanban Board</h1>
             </div>
-            <p className="text-base text-gray-600 ml-1">🎯 Drag and drop cards to update their status</p>
+            <p className="text-base text-gray-600 ml-1 mt-2">🎯 Drag and drop cards to update their status</p>
           </div>
           <button
             onClick={() => navigate('/requests/create')}
@@ -227,7 +227,7 @@ const KanbanBoard = () => {
 
         {/* Kanban Columns Grid */}
         <DragDropContext onDragEnd={handleDragEnd}>
-          <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 xl:grid-cols-4 gap-5">
           {Object.keys(columns).map((status) => {
             const statusTitle = status === RequestStatus.NEW ? '📥 New' :
                                status === RequestStatus.IN_PROGRESS ? '⚙️ In Progress' :
@@ -237,9 +237,9 @@ const KanbanBoard = () => {
             return (
               <div key={status} className="relative">
                 {/* Column Container */}
-                <div className={`rounded-3xl p-6 shadow-xl border-2 ${getStatusColor(status)} min-h-[800px] transition-all duration-300 hover:shadow-2xl`}>
+                <div className={`rounded-3xl p-5 shadow-xl border-2 ${getStatusColor(status)} min-h-[800px] transition-all duration-300 hover:shadow-2xl`}>
                   {/* Column Header */}
-                  <div className="flex items-center justify-between mb-6 pb-4 border-b-2 border-gray-200">
+                  <div className="flex items-center justify-between mb-5 pb-4 border-b-2 border-gray-200">
                     <h2 className="font-bold text-gray-900 text-lg flex items-center gap-2">
                       {statusTitle}
                     </h2>

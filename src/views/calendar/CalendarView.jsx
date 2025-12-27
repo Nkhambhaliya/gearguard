@@ -88,11 +88,11 @@ const CalendarView = () => {
   const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50/30 to-emerald-50/20 py-12">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50/30 to-emerald-50/20 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
-        <div className="mb-12">
-          <div className="flex items-center gap-3 mb-3">
+        <div className="mb-6 space-y-2">
+          <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-gradient-to-br from-green-600 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -106,9 +106,9 @@ const CalendarView = () => {
         {/* Calendar Card */}
         <div className="relative overflow-hidden rounded-3xl">
           <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-emerald-100 opacity-40"></div>
-          <div className="relative bg-white/90 backdrop-blur-xl shadow-2xl border border-gray-200/50 p-8 sm:p-10 rounded-3xl">
+          <div className="relative bg-white/90 backdrop-blur-xl shadow-2xl border border-gray-200/50 p-6 sm:p-8 rounded-3xl">
             {/* Calendar Header */}
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-10">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
               <button
                 onClick={previousMonth}
                 className="w-full sm:w-auto group px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-2xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 text-base font-bold flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
@@ -135,7 +135,7 @@ const CalendarView = () => {
             </div>
 
             {/* Day Names */}
-            <div className="grid grid-cols-7 gap-3 mb-6">
+            <div className="grid grid-cols-7 gap-2 mb-4">
               {dayNames.map(day => (
                 <div key={day} className="text-center font-bold text-gray-700 py-4 text-sm uppercase tracking-wider bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
                   {day}
@@ -144,7 +144,7 @@ const CalendarView = () => {
             </div>
 
             {/* Calendar Grid */}
-            <div className="grid grid-cols-7 gap-3">
+            <div className="grid grid-cols-7 gap-2">
               {/* Empty cells for days before month starts */}
               {Array.from({ length: startingDayOfWeek }).map((_, index) => (
                 <div key={`empty-${index}`} className="h-28 sm:h-36 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl border-2 border-gray-200"></div>

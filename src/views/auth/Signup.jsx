@@ -29,32 +29,32 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-8 py-16 animate-fade-in">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-6 py-8 animate-fade-in">
       <div className="max-w-lg w-full">
         {/* Logo and Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-3xl shadow-2xl mb-6 animate-bounce-subtle">
+        <div className="text-center mb-8 space-y-4">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-3xl shadow-2xl animate-bounce-subtle">
             <svg className="w-11 h-11 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
             </svg>
           </div>
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-3">GearGuard</h1>
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">GearGuard</h1>
           <p className="text-sm text-gray-600">Enterprise Equipment Management</p>
         </div>
 
         {/* Signup Card */}
         <div className="relative overflow-hidden rounded-3xl">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-indigo-100 opacity-50"></div>
-          <div className="relative bg-white/90 backdrop-blur-xl shadow-2xl p-10 animate-scale-in">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold text-gray-900 mb-3">
+          <div className="relative bg-white/90 backdrop-blur-xl shadow-2xl p-8 animate-scale-in">
+            <div className="text-center mb-8 space-y-2">
+              <h2 className="text-3xl font-bold text-gray-900">
                 Create Account
               </h2>
               <p className="text-base text-gray-600">Sign up to get started</p>
             </div>
         
             {error && (
-              <div className="bg-gradient-to-r from-red-50 to-red-100 border-l-4 border-red-500 text-red-800 px-6 py-4 rounded-2xl mb-8 text-sm shadow-lg animate-slide-down">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 border-l-4 border-red-500 text-red-800 px-6 py-4 rounded-2xl mb-6 text-sm shadow-lg animate-slide-down">
               <div className="flex items-center gap-2">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
@@ -64,7 +64,7 @@ const Signup = () => {
             </div>
           )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="block text-gray-700 text-sm font-semibold mb-2">
                 Full Name
@@ -179,7 +179,7 @@ const Signup = () => {
             </button>
           </form>
 
-            <div className="mt-10 text-center">
+            <div className="mt-8 text-center">
               <p className="text-gray-600 text-base">
                 Already have an account?{' '}
                 <Link to="/login" className="text-blue-600 hover:text-blue-700 font-bold hover:underline transition-all">
@@ -191,7 +191,7 @@ const Signup = () => {
         </div>
 
         {/* Footer */}
-        <p className="text-center text-sm text-gray-500 mt-12">
+        <p className="text-center text-sm text-gray-500 mt-8">
           Secure equipment management system
         </p>
       </div>

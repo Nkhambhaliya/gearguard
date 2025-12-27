@@ -63,11 +63,11 @@ const AddEquipment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-indigo-50/20 py-12">
-      <div className="max-w-5xl mx-auto px-6 sm:px-10">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-indigo-50/20 py-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
-        <div className="mb-10">
-          <div className="flex items-center gap-3 mb-3">
+        <div className="mb-8 space-y-2">
+          <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -79,7 +79,7 @@ const AddEquipment = () => {
         </div>
 
         {error && (
-          <div className="bg-gradient-to-r from-red-50 to-red-100 border-l-4 border-red-500 text-red-800 px-6 py-4 rounded-2xl mb-8 text-sm shadow-lg animate-slide-down">
+          <div className="bg-gradient-to-r from-red-50 to-red-100 border-l-4 border-red-500 text-red-800 px-6 py-4 rounded-2xl mb-6 text-sm shadow-lg animate-slide-down">
           <div className="flex items-center gap-2">
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
@@ -92,7 +92,7 @@ const AddEquipment = () => {
       {/* Main Form Card */}
       <div className="relative overflow-hidden rounded-3xl">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-100 opacity-40"></div>
-        <form onSubmit={handleSubmit} className="relative bg-white/90 backdrop-blur-xl shadow-2xl border border-gray-200/50 p-10 sm:p-12 rounded-3xl space-y-8">
+        <form onSubmit={handleSubmit} className="relative bg-white/90 backdrop-blur-xl shadow-2xl border border-gray-200/50 p-6 sm:p-8 rounded-3xl space-y-6">
           
           {/* Section: Basic Information */}
           <div className="space-y-6">
@@ -248,7 +248,7 @@ const AddEquipment = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t-2 border-gray-200">
+          <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t-2 border-gray-200">
             <button
               type="submit"
               disabled={loading}
