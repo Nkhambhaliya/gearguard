@@ -63,22 +63,27 @@ const AddEquipment = () => {
   };
 
   return (
-    <div className="container mx-auto px-6 py-8 max-w-3xl">
+    <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-4xl animate-fade-in">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Add Equipment</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Add Equipment</h1>
         <p className="text-sm text-gray-500 mt-1">Register new equipment to your inventory</p>
       </div>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm">
-          {error}
+        <div className="bg-red-50 border-l-4 border-red-500 text-red-700 px-4 py-3 rounded-xl mb-6 text-sm animate-slide-down">
+          <div className="flex items-center gap-2">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+            </svg>
+            {error}
+          </div>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow p-6 space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <form onSubmit={handleSubmit} className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-soft p-6 sm:p-8 space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-gray-700 text-sm font-medium mb-1.5">
+            <label className="block text-gray-700 text-sm font-semibold mb-2">
               Equipment Name *
             </label>
             <input
@@ -86,14 +91,14 @@ const AddEquipment = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm bg-gray-50 hover:bg-white transition-all"
               placeholder="e.g., CNC Machine"
               required
             />
           </div>
 
           <div>
-            <label className="block text-gray-700 text-sm font-medium mb-1.5">
+            <label className="block text-gray-700 text-sm font-semibold mb-2">
               Serial Number *
             </label>
             <input
@@ -101,7 +106,7 @@ const AddEquipment = () => {
               name="serialNumber"
               value={formData.serialNumber}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm bg-gray-50 hover:bg-white transition-all font-mono"
               placeholder="e.g., SN-12345"
               required
             />
@@ -109,7 +114,7 @@ const AddEquipment = () => {
         </div>
 
         <div>
-          <label className="block text-gray-700 text-sm font-medium mb-1.5">
+          <label className="block text-gray-700 text-sm font-semibold mb-2">
             Department *
           </label>
           <input
@@ -117,15 +122,15 @@ const AddEquipment = () => {
             name="department"
             value={formData.department}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-              placeholder="e.g., Manufacturing"
-              required
-            />
+            className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm bg-gray-50 hover:bg-white transition-all"
+            placeholder="e.g., Manufacturing"
+            required
+          />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-gray-700 text-sm font-medium mb-1.5">
+            <label className="block text-gray-700 text-sm font-semibold mb-2">
               Purchase Date *
             </label>
             <input
@@ -133,28 +138,28 @@ const AddEquipment = () => {
               name="purchaseDate"
               value={formData.purchaseDate}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm bg-gray-50 hover:bg-white transition-all"
               required
             />
           </div>
 
           <div>
-            <label className="block text-gray-700 text-sm font-medium mb-1.5">
-              Warranty
+            <label className="block text-gray-700 text-sm font-semibold mb-2">
+              Warranty Period
             </label>
             <input
               type="text"
               name="warranty"
               value={formData.warranty}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm bg-gray-50 hover:bg-white transition-all"
               placeholder="e.g., 2 years"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-gray-700 text-sm font-medium mb-1.5">
+          <label className="block text-gray-700 text-sm font-semibold mb-2">
             Location *
           </label>
           <input
@@ -162,44 +167,59 @@ const AddEquipment = () => {
             name="location"
             value={formData.location}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm bg-gray-50 hover:bg-white transition-all"
             placeholder="e.g., Building A, Floor 2"
             required
           />
         </div>
 
         <div>
-          <label className="block text-gray-700 text-sm font-medium mb-1.5">
+          <label className="block text-gray-700 text-sm font-semibold mb-2">
             Assigned Maintenance Team *
           </label>
           <select
             name="teamId"
             value={formData.teamId}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm bg-gray-50 hover:bg-white transition-all appearance-none cursor-pointer"
             required
           >
-              <option value="">Select a team</option>
-              {teams.map((team) => (
-                <option key={team.id} value={team.id}>
-                  {team.name}
-                </option>
-              ))}
-            </select>
+            <option value="">Select a maintenance team</option>
+            {teams.map((team) => (
+              <option key={team.id} value={team.id}>
+                {team.name}
+              </option>
+            ))}
+          </select>
         </div>
 
-        <div className="flex gap-3 pt-4">
+        <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t border-gray-200">
           <button
             type="submit"
             disabled={loading}
-            className="flex-1 bg-blue-600 text-white py-2.5 px-4 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 transition-colors font-medium text-sm"
+            className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3.5 px-6 rounded-xl hover:from-blue-700 hover:to-indigo-700 disabled:from-gray-400 disabled:to-gray-400 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:transform-none disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
-            {loading ? 'Adding Equipment...' : 'Add Equipment'}
+            {loading ? (
+              <>
+                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Adding Equipment...
+              </>
+            ) : (
+              <>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                Add Equipment
+              </>
+            )}
           </button>
           <button
             type="button"
             onClick={() => navigate('/equipment')}
-            className="flex-1 bg-gray-100 text-gray-700 py-2.5 px-4 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm"
+            className="flex-1 sm:flex-none bg-gray-100 text-gray-700 py-3.5 px-6 rounded-xl hover:bg-gray-200 transition-all duration-200 font-semibold border border-gray-300"
           >
             Cancel
           </button>

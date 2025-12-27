@@ -57,23 +57,26 @@ const EquipmentList = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="text-xl text-gray-600">Loading equipment...</div>
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-blue-600 border-t-transparent mb-4"></div>
+          <p className="text-gray-600 font-medium">Loading equipment...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-6 py-8 max-w-7xl">
-      <div className="flex justify-between items-center mb-8">
+    <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-7xl">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Equipment</h1>
-          <p className="text-sm text-gray-500 mt-1">Manage your equipment inventory</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Equipment Inventory</h1>
+          <p className="text-sm text-gray-500 mt-1">Manage your equipment assets</p>
         </div>
         <button
           onClick={() => navigate('/equipment/add')}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium flex items-center gap-2"
+          className="w-full sm:w-auto px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 text-sm font-semibold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
           </svg>
           Add Equipment
@@ -81,74 +84,110 @@ const EquipmentList = () => {
       </div>
 
       {equipment.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-xl">
-          <svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-          </svg>
-          <p className="text-gray-500 text-lg">No equipment found. Add your first equipment to get started.</p>
+        <div className="text-center py-16 bg-white/80 backdrop-blur-lg rounded-2xl shadow-soft animate-scale-in">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full mb-6">
+            <svg className="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            </svg>
+          </div>
+          <h3 className="text-xl font-semibold text-gray-900 mb-2">No Equipment Found</h3>
+          <p className="text-gray-500 mb-6">Add your first equipment to get started with inventory management</p>
+          <button
+            onClick={() => navigate('/equipment/add')}
+            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 inline-flex items-center gap-2"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+            Add Your First Equipment
+          </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6 animate-fade-in">
           {equipment.map((item) => (
             <div
               key={item.id}
-              className={`bg-white rounded-xl shadow hover:shadow-md transition-shadow p-6 ${item.isScrapped ? 'opacity-60' : ''}`}
+              className={`bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 ${
+                item.isScrapped ? 'opacity-60' : 'hover:-translate-y-1'
+              }`}
             >
-              <div className="flex justify-between items-start mb-6">
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1">{item.name}</h3>
-                  <p className="text-sm text-gray-500">{item.serialNumber}</p>
-                </div>
-                {item.isScrapped ? (
-                  <span className="px-3 py-1 bg-red-50 text-red-600 text-xs font-medium rounded-full">
-                    Scrapped
-                  </span>
-                ) : (
-                  <span className="px-3 py-1 bg-green-50 text-green-600 text-xs font-medium rounded-full">
-                    Active
-                  </span>
-                )}
-              </div>
-
-              <div className="space-y-2 mb-6 pb-6 border-b border-gray-100">
-                  <div className="flex items-center text-sm">
-                    <svg className="w-5 h-5 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
-                    <span className="text-gray-700 font-medium">{item.department}</span>
+              {/* Header */}
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-4 border-b border-gray-100">
+                <div className="flex justify-between items-start gap-3">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg font-bold text-gray-900 truncate mb-1">{item.name}</h3>
+                    <p className="text-xs text-gray-600 font-mono">{item.serialNumber}</p>
                   </div>
-                <div className="flex items-center text-sm text-gray-600">
-                  <svg className="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  <span>{item.location}</span>
+                  {item.isScrapped ? (
+                    <span className="px-2.5 py-1 bg-red-100 text-red-700 text-[10px] font-bold rounded-md border border-red-200 whitespace-nowrap">
+                      SCRAPPED
+                    </span>
+                  ) : (
+                    <span className="px-2.5 py-1 bg-green-100 text-green-700 text-[10px] font-bold rounded-md border border-green-200 whitespace-nowrap">
+                      ACTIVE
+                    </span>
+                  )}
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <button
-                  onClick={() => navigate(`/requests/create?equipmentId=${item.id}`)}
-                  className="w-full px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium disabled:bg-gray-300 disabled:cursor-not-allowed"
-                  disabled={item.isScrapped}
-                >
-                  Request Maintenance ({maintenanceCounts[item.id] || 0})
-                </button>
-                <div className="flex gap-2">
-                  {!item.isScrapped && (
-                    <button
-                      onClick={() => handleScrap(item.id)}
-                      className="flex-1 px-3 py-2 text-yellow-600 hover:bg-yellow-50 rounded-lg transition-colors text-sm"
-                    >
-                      Scrap
-                    </button>
-                  )}
+              {/* Content */}
+              <div className="px-5 py-4">
+                <div className="space-y-3 mb-5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                      </svg>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wide mb-0.5">Department</p>
+                      <p className="text-sm text-gray-900 font-semibold truncate">{item.department}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wide mb-0.5">Location</p>
+                      <p className="text-sm text-gray-900 font-semibold truncate">{item.location}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="space-y-2.5 pt-4 border-t border-gray-100">
                   <button
-                    onClick={() => handleDelete(item.id)}
-                    className="flex-1 px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors text-sm"
+                    onClick={() => navigate(`/requests/create?equipmentId=${item.id}`)}
+                    className="w-full px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 text-sm font-semibold disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed shadow-sm hover:shadow-md disabled:shadow-none flex items-center justify-center gap-2"
+                    disabled={item.isScrapped}
                   >
-                    Delete
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                    Request Maintenance ({maintenanceCounts[item.id] || 0})
                   </button>
+                  
+                  <div className="grid grid-cols-2 gap-2">
+                    {!item.isScrapped && (
+                      <button
+                        onClick={() => handleScrap(item.id)}
+                        className="px-3 py-2 text-yellow-700 bg-yellow-50 hover:bg-yellow-100 rounded-lg transition-all duration-200 text-xs font-semibold border border-yellow-200"
+                      >
+                        ⚠️ Scrap
+                      </button>
+                    )}
+                    <button
+                      onClick={() => handleDelete(item.id)}
+                      className={`px-3 py-2 text-red-700 bg-red-50 hover:bg-red-100 rounded-lg transition-all duration-200 text-xs font-semibold border border-red-200 ${!item.isScrapped ? '' : 'col-span-2'}`}
+                    >
+                      🗑️ Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

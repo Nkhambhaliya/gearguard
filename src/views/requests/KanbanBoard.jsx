@@ -115,15 +115,15 @@ const KanbanBoard = () => {
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
-            className={`bg-white p-4 rounded-lg shadow hover:shadow-md mb-3 border-l-4 transition-shadow ${
-              overdue ? 'border-red-500' : 'border-blue-500'
-            } ${snapshot.isDragging ? 'shadow-lg' : ''}`}
+            className={`bg-white p-4 rounded-xl shadow-soft hover:shadow-xl mb-3 border-l-4 transition-all duration-200 transform hover:-translate-y-1 ${
+              overdue ? 'border-red-500 bg-red-50/30' : 'border-blue-500'
+            } ${snapshot.isDragging ? 'shadow-2xl scale-105 rotate-2' : ''}`}
           >
             <div className="flex justify-between items-start mb-3">
-              <h3 className="font-semibold text-gray-900 text-sm flex-1">{request.subject}</h3>
+              <h3 className="font-bold text-gray-900 text-sm flex-1 line-clamp-2">{request.subject}</h3>
               {overdue && (
-                <span className="px-2 py-0.5 bg-red-50 text-red-600 text-xs font-medium rounded">
-                  OVERDUE
+                <span className="px-2 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-bold rounded-lg shadow-md animate-pulse">
+                  ⚠️ OVERDUE
                 </span>
               )}
             </div>
@@ -182,17 +182,17 @@ const KanbanBoard = () => {
   };
 
   return (
-    <div className="container mx-auto px-6 py-8 max-w-7xl">
-      <div className="flex justify-between items-center mb-8">
+    <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-7xl animate-fade-in">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Kanban Board</h1>
-          <p className="text-sm text-gray-500 mt-1">Drag and drop to update status</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Kanban Board</h1>
+          <p className="text-sm text-gray-500 mt-1">🎯 Drag and drop cards to update status</p>
         </div>
         <button
           onClick={() => navigate('/requests/create')}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium flex items-center gap-2"
+          className="w-full sm:w-auto px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 text-sm font-semibold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
           </svg>
           New Request
@@ -200,18 +200,18 @@ const KanbanBoard = () => {
       </div>
 
       <DragDropContext onDragEnd={handleDragEnd}>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
           {Object.keys(columns).map((status) => {
-            const statusTitle = status === RequestStatus.NEW ? 'New' :
-                               status === RequestStatus.IN_PROGRESS ? 'In Progress' :
-                               status === RequestStatus.REPAIRED ? 'Repaired' :
-                               status === RequestStatus.SCRAP ? 'Scrap' : status;
+            const statusTitle = status === RequestStatus.NEW ? '📥 New' :
+                               status === RequestStatus.IN_PROGRESS ? '⚙️ In Progress' :
+                               status === RequestStatus.REPAIRED ? '✅ Repaired' :
+                               status === RequestStatus.SCRAP ? '🗑️ Scrap' : status;
             
             return (
-              <div key={status} className={`rounded-xl p-4 shadow-sm ${getStatusColor(status)}`}>
+              <div key={status} className={`rounded-2xl p-4 shadow-soft ${getStatusColor(status)}`}>
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="font-semibold text-gray-900 text-sm">{statusTitle}</h2>
-                  <span className="px-2 py-0.5 bg-gray-100 rounded text-xs text-gray-600">
+                  <h2 className="font-bold text-gray-900 text-base">{statusTitle}</h2>
+                  <span className="px-3 py-1 bg-white/80 backdrop-blur rounded-full text-xs text-gray-700 font-bold shadow-sm">
                     {columns[status].length}
                   </span>
                 </div>
@@ -237,11 +237,16 @@ const KanbanBoard = () => {
       </DragDropContext>
 
       {showDurationModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl">
-            <div className="mb-4">
-              <h2 className="text-lg font-semibold text-gray-900 mb-1">Enter Duration</h2>
-              <p className="text-sm text-gray-500">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 px-4 animate-fade-in">
+          <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-8 max-w-md w-full shadow-2xl animate-scale-in">
+            <div className="mb-6">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h2 className="text-xl font-bold text-gray-900 mb-2">Enter Duration</h2>
+              <p className="text-sm text-gray-600">
                 How many hours did this maintenance take?
               </p>
             </div>
@@ -249,8 +254,8 @@ const KanbanBoard = () => {
               type="number"
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
-              placeholder="Enter hours"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm mb-4"
+              placeholder="Enter hours (e.g., 2.5)"
+              className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base mb-6 font-semibold"
               step="0.5"
               min="0"
               autoFocus
@@ -258,9 +263,9 @@ const KanbanBoard = () => {
             <div className="flex gap-3">
               <button
                 onClick={handleDurationSubmit}
-                className="flex-1 bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm"
+                className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
-                Submit
+                ✓ Submit
               </button>
               <button
                 onClick={() => {
@@ -268,7 +273,7 @@ const KanbanBoard = () => {
                   setDuration('');
                   setSelectedRequest(null);
                 }}
-                className="flex-1 bg-gray-100 text-gray-700 py-2.5 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm"
+                className="flex-1 bg-gray-100 text-gray-700 py-3 rounded-xl hover:bg-gray-200 transition-all duration-200 font-semibold border border-gray-300"
               >
                 Cancel
               </button>
