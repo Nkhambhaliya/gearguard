@@ -88,82 +88,99 @@ const CalendarView = () => {
   const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-7xl animate-fade-in">
-      <div className="mb-6 sm:mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Maintenance Calendar</h1>
-        <p className="text-sm text-gray-500 mt-1">📅 Schedule and track preventive maintenance</p>
-      </div>
-
-      <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-soft p-4 sm:p-6">
-        {/* Calendar Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
-          <button
-            onClick={previousMonth}
-            className="w-full sm:w-auto px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 text-sm font-semibold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Previous
-          </button>
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
-            {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
-          </h2>
-          <button
-            onClick={nextMonth}
-            className="w-full sm:w-auto px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 text-sm font-semibold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-          >
-            Next
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-
-        <div className="grid grid-cols-7 gap-1 sm:gap-2 mb-3">
-          {dayNames.map(day => (
-            <div key={day} className="text-center font-bold text-gray-600 py-2 text-xs sm:text-sm uppercase">
-              {day}
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50/30 to-emerald-50/20 py-12">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+        {/* Page Header */}
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-12 h-12 bg-gradient-to-br from-green-600 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
             </div>
-          ))}
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-green-900 via-emerald-900 to-teal-900 bg-clip-text text-transparent">Maintenance Calendar</h1>
+          </div>
+          <p className="text-base text-gray-600 ml-1">📅 Schedule and track preventive maintenance tasks</p>
         </div>
 
-        {/* Calendar Grid */}
-        <div className="grid grid-cols-7 gap-2 sm:gap-3">
-          {/* Empty cells for days before month starts */}
-          {Array.from({ length: startingDayOfWeek }).map((_, index) => (
-            <div key={`empty-${index}`} className="h-20 sm:h-28 bg-gray-50 rounded-xl"></div>
-          ))}
-
-          {/* Days of the month */}
-          {Array.from({ length: daysInMonth }).map((_, index) => {
-            const day = index + 1;
-            const hasTasks = hasTasksOnDate(day);
-            const taskCount = getTaskCountForDate(day);
-
-            return (
-              <div
-                key={day}
-                onClick={() => handleDateClick(day)}
-                className={`h-20 sm:h-28 border-2 rounded-xl p-2 sm:p-3 cursor-pointer transition-all duration-200 transform hover:scale-105 ${
-                  hasTasks
-                    ? 'bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-300 hover:border-blue-500 hover:shadow-xl'
-                    : 'bg-white border-gray-100 hover:border-gray-300 hover:shadow-lg'
-                }`}
+        {/* Calendar Card */}
+        <div className="relative overflow-hidden rounded-3xl">
+          <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-emerald-100 opacity-40"></div>
+          <div className="relative bg-white/90 backdrop-blur-xl shadow-2xl border border-gray-200/50 p-8 sm:p-10 rounded-3xl">
+            {/* Calendar Header */}
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-10">
+              <button
+                onClick={previousMonth}
+                className="w-full sm:w-auto group px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-2xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 text-base font-bold flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
-                <div className="font-bold text-gray-800 text-base sm:text-lg">{day}</div>
-                {hasTasks && (
-                  <div className="mt-1 sm:mt-2">
-                    <span className="inline-block bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-bold shadow-md">
-                      {taskCount} {taskCount > 1 ? '📅' : '📆'}
-                    </span>
-                  </div>
-                )}
+                <svg className="w-6 h-6 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                </svg>
+                Previous
+              </button>
+              <div className="text-center">
+                <h2 className="text-3xl font-bold text-gray-900">
+                  {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
+                </h2>
               </div>
-            );
-          })}
+              <button
+                onClick={nextMonth}
+                className="w-full sm:w-auto group px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-2xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 text-base font-bold flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              >
+                Next
+                <svg className="w-6 h-6 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Day Names */}
+            <div className="grid grid-cols-7 gap-3 mb-6">
+              {dayNames.map(day => (
+                <div key={day} className="text-center font-bold text-gray-700 py-4 text-sm uppercase tracking-wider bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
+                  {day}
+                </div>
+              ))}
+            </div>
+
+            {/* Calendar Grid */}
+            <div className="grid grid-cols-7 gap-3">
+              {/* Empty cells for days before month starts */}
+              {Array.from({ length: startingDayOfWeek }).map((_, index) => (
+                <div key={`empty-${index}`} className="h-28 sm:h-36 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl border-2 border-gray-200"></div>
+              ))}
+
+              {/* Days of the month */}
+              {Array.from({ length: daysInMonth }).map((_, index) => {
+                const day = index + 1;
+                const hasTasks = hasTasksOnDate(day);
+                const taskCount = getTaskCountForDate(day);
+
+                return (
+                  <div
+                    key={day}
+                    onClick={() => handleDateClick(day)}
+                    className={`relative h-28 sm:h-36 border-2 rounded-2xl p-4 cursor-pointer transition-all duration-300 transform hover:scale-105 hover:z-10 ${
+                      hasTasks
+                        ? 'bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 border-green-300 hover:border-green-500 hover:shadow-2xl'
+                        : 'bg-white border-gray-200 hover:border-gray-400 hover:shadow-xl'
+                    }`}
+                  >
+                    <div className="font-bold text-gray-900 text-lg sm:text-xl">{day}</div>
+                    {hasTasks && (
+                      <div className="absolute bottom-3 left-3 right-3">
+                        <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white text-xs px-3 py-2 rounded-xl font-bold shadow-lg flex items-center justify-center gap-1">
+                          <span>{taskCount}</span>
+                          <span>{taskCount > 1 ? '📅' : '📆'}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
-      </div>
 
       {selectedDate && selectedTasks.length > 0 && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
@@ -245,6 +262,7 @@ const CalendarView = () => {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };
